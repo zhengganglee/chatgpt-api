@@ -24,6 +24,7 @@
     "node": ">=14"
   },
   "scripts": {
+    "postinstall": "npm install --save isomorphic-fetch",
     "build": "tsup",
     "dev": "tsup --watch",
     "clean": "del build",
@@ -39,6 +40,7 @@
   "dependencies": {
     "@dqbd/tiktoken": "^0.4.0",
     "cac": "^6.7.14",
+    "chatgpt": "^5.0.6",
     "conf": "^11.0.1",
     "eventsource-parser": "^0.0.5",
     "keyv": "^4.5.2",
