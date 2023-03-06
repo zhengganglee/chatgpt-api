@@ -27,7 +27,7 @@ const server = http.createServer((req, res) => {
         res.end(JSON.stringify(response))
       } else {
         res.writeHead(400, { 'Content-Type': 'text/plain' })
-        res.end('Bad Request: Invalid prompt parameter2222')
+        res.end('Bad Request: Invalid prompt parameter')
       }
     })
   } else {
