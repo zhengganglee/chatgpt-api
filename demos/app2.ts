@@ -21,7 +21,15 @@ const server = http.createServer((req, res) => {
         const promptValue =
           typeof data.prompt === 'string' ? data.prompt : data.prompt.join(',')
         const api = new ChatGPTAPI({ apiKey: process.env.OPENAI_API_KEY })
-        const response = await api.sendMessage(promptValue)
+
+        const msgId =
+          typeof data.parentMessageId === 'string'
+            ? data.parentMessageId
+            : data.parentMessageId.join(',')
+        const response = await api.sendMessage(
+          promptValue,
+          msgId ? { parentMessageId: msgId } : {}
+        )
 
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify(response))
