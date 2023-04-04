@@ -18,14 +18,13 @@ const server = http.createServer((req, res) => {
     req.on('end', async () => {
       const data = querystring.parse(body)
       if (data.prompt) {
-        const promptValue =
-          typeof data.prompt === 'string' ? data.prompt : data.prompt.join(',')
+        const promptValue = data.prompt[0]
         const api = new ChatGPTAPI({ apiKey: process.env.OPENAI_API_KEY })
 
-        const msgId =
-          typeof data.parentMessageId === 'string'
-            ? data.parentMessageId
-            : data.parentMessageId.join(',')
+        const msgId = data.parentMessageId[0]
+        console.log(
+          `############################ promptValue=${promptValue} msgId=${msgId}`
+        )
         const response = await api.sendMessage(
           promptValue,
           msgId ? { parentMessageId: msgId } : {}
