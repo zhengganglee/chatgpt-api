@@ -25,13 +25,25 @@ const server = http.createServer((req, res) => {
         let opts = msgId ? {parentMessageId: msgId} : {}
         console.log(`############################22 promptValue=${prompt} msgId=${msgId} opts=${JSON.stringify(opts)}`)
 
-        let response = await oraPromise(api.sendMessage(prompt, opts), {
+        // const prompt = 'Write a poem about cats.'
+        let res2 = await oraPromise(api.sendMessage(prompt), {
           text: prompt
         })
-        console.log('response====\n' + JSON.stringify(response) + '\n')
+        console.log('=====res1\n' + res2.text + '\n')
+
+        // const prompt2 = 'Can you make it cuter and shorter?'
+        res2 = await oraPromise(
+            api.sendMessage(prompt, {
+              parentMessageId: res2.id
+            }),
+            {
+              text: prompt
+            }
+        )
+        console.log('=====res2\n' + res2.text + '\n')
 
         res.writeHead(200, { 'Content-Type': 'application/json' })
-        res.end(JSON.stringify(response))
+        res.end(JSON.stringify(res2))
       } else {
         res.writeHead(400, { 'Content-Type': 'text/plain' })
         res.end('Bad Request: Invalid prompt parameter')
