@@ -3,6 +3,7 @@ import http from 'http'
 import process from 'process'
 import querystring from 'querystring'
 
+import { oraPromise } from 'ora'
 import { ChatGPTAPI } from '../src'
 
 dotenv.config()
@@ -18,21 +19,16 @@ const server = http.createServer((req, res) => {
     req.on('end', async () => {
       const data = querystring.parse(body)
       if (data.prompt) {
-        const promptValue =
-          typeof data.prompt === 'string' ? data.prompt : data.prompt.join(',')
-        const api = new ChatGPTAPI({ apiKey: process.env.OPENAI_API_KEY })
+        const api = new ChatGPTAPI({apiKey: process.env.OPENAI_API_KEY})
+        const prompt = typeof data.prompt === 'string' ? data.prompt : null
+        const msgId = typeof data.msgId === 'string' ? data.msgId : null
+        let opts = msgId ? {parentMessageId: msgId} : {}
+        console.log(`############################22 promptValue=${prompt} msgId=${msgId} opts=${JSON.stringify(opts)}`)
 
-        const msgId =
-          typeof data.parentMessageId === 'string'
-            ? data.parentMessageId
-            : data.parentMessageId.join(',')
-        let opts = msgId ? { parentMessageId: msgId } : {}
-        console.log(
-          `############################22 promptValue=${promptValue} msgId=${msgId} opts=${JSON.stringify(
-            opts
-          )}`
-        )
-        const response = await api.sendMessage(promptValue, opts)
+        let response = await oraPromise(api.sendMessage(prompt, opts), {
+          text: prompt
+        })
+        console.log('response====\n' + JSON.stringify(response) + '\n')
 
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify(response))
