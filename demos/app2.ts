@@ -21,7 +21,7 @@ const server = http.createServer((req, res) => {
       if (data.prompt) {
         const prompt = typeof data.prompt === 'string' ? data.prompt : null
         const msgId = typeof data.msgId === 'string' ? data.msgId : null
-        let opts = msgId ? {parentMessageId: msgId} : {}
+        let opts = msgId ? { parentMessageId: msgId } : {}
         console.log(`收到请求 prompt=${prompt} msgId=${msgId} opts=${JSON.stringify(opts)}`)
 
         let result = await api.sendMessage(prompt, opts)
