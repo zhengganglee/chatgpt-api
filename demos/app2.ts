@@ -25,9 +25,11 @@ const server = http.createServer((req, res) => {
         console.log(`收到请求 prompt=${prompt} msgId=${msgId} opts=${JSON.stringify(opts)}`)
 
         let result = await api.sendMessage(prompt, opts)
+        console.log(`响应结果200 prompt=${prompt} result=${result}`)
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify(result))
       } else {
+        console.log(`响应结果400 prompt=${prompt}`)
         res.writeHead(400, { 'Content-Type': 'text/plain' })
         res.end('Bad Request: Invalid prompt parameter')
       }
