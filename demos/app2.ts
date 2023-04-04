@@ -46,23 +46,18 @@ const server = http.createServer((req, res) => {
         // }
 
         const prompt1 = 'Write a poem about cats.'
-        let res2 = await oraPromise(api.sendMessage(prompt1), {
-          text: prompt1
-        })
+        let res2 = await api.sendMessage(prompt1)
         console.log('====1\n' + res2.text + '\n')
         console.log('====2\n' + JSON.stringify(res2) + '\n')
+        console.log('====3\n' + res2.id + '\n')
 
         const prompt2 = 'Can you make it cuter and shorter?'
-        res2 = await oraPromise(
-            api.sendMessage(prompt2, {
-              parentMessageId: res2.id
-            }),
-            {
-              text: prompt2
-            }
-        )
-        console.log('====3\n' + res2.text + '\n')
-        console.log('====4\n' + JSON.stringify(res2) + '\n')
+        res2 = await api.sendMessage(prompt2, {
+          parentMessageId: res2.id
+        })
+        console.log('====a\n' + res2.text + '\n')
+        console.log('====b\n' + JSON.stringify(res2) + '\n')
+        console.log('====c\n' + res2.id + '\n')
 
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify(res2))
