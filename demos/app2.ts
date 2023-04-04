@@ -26,13 +26,11 @@ const server = http.createServer((req, res) => {
           typeof data.parentMessageId === 'string'
             ? data.parentMessageId
             : data.parentMessageId.join(',')
+        let opts = msgId ? { parentMessageId: msgId } : {}
         console.log(
-          `############################22 promptValue=${promptValue} msgId=${msgId}`
+          `############################22 promptValue=${promptValue} msgId=${msgId} opts=${opts}`
         )
-        const response = await api.sendMessage(
-          promptValue,
-          msgId ? { parentMessageId: msgId } : {}
-        )
+        const response = await api.sendMessage(promptValue, opts)
 
         res.writeHead(200, { 'Content-Type': 'application/json' })
         res.end(JSON.stringify(response))
