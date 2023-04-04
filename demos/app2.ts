@@ -45,15 +45,15 @@ const server = http.createServer((req, res) => {
         //   console.log('=====res1\n' + res2.text + '\n')
         // }
 
-        const prompt1 = 'Write a poem about cats.'
-        let res2 = await api.sendMessage(prompt1)
-        console.log('====1\n' + res2.text + '\n')
-        console.log('====2\n' + JSON.stringify(res2) + '\n')
-        console.log('====3\n' + res2.id + '\n')
+        // const prompt1 = 'Write a poem about cats.'
+        // let res2 = await api.sendMessage(prompt1)
+        // console.log('====1\n' + res2.text + '\n')
+        // console.log('====2\n' + JSON.stringify(res2) + '\n')
+        // console.log('====3\n' + res2.id + '\n')
 
         const prompt2 = 'Can you make it cuter and shorter?'
-        res2 = await api.sendMessage(prompt2, {
-          parentMessageId: res2.id
+        let res2 = await api.sendMessage(prompt2, {
+          parentMessageId: 'chatcmpl-71WWnLq0IuHbv11jxZeRaaTH7UaN4'
         })
         console.log('====a\n' + res2.text + '\n')
         console.log('====b\n' + JSON.stringify(res2) + '\n')
