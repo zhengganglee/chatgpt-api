@@ -40,7 +40,6 @@
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
     "cac": "^6.7.14",
-    "chatgpt": "^5.0.6",
     "conf": "^11.0.1",
     "eventsource-parser": "^1.0.0",
     "isomorphic-fetch": "^3.0.0",

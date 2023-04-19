@@ -8,10 +8,9 @@ import { ChatGPTAPI } from '../src'
 dotenv.config()
 const api = new ChatGPTAPI({
   apiKey: process.env.OPENAI_API_KEY,
+  debug: true,
   completionParams: {
-    model: 'gpt-4',
-    temperature: 0.5,
-    top_p: 0.8
+    model: 'gpt-4'
   }
 })
 
