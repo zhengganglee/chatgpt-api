@@ -9,7 +9,7 @@ dotenv.config()
 const api = new ChatGPTAPI({apiKey: process.env.OPENAI_API_KEY})
 
 const server = http.createServer((req, res) => {
-  if (req.method === 'POST') {
+  if (req.method === 'POST' && req.url === '/api/chat') {
     try {
       let body = ''
       req.on('data', (chunk) => {
