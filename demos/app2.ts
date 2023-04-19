@@ -6,7 +6,14 @@ import querystring from 'querystring'
 import { ChatGPTAPI } from '../src'
 
 dotenv.config()
-const api = new ChatGPTAPI({apiKey: process.env.OPENAI_API_KEY})
+const api = new ChatGPTAPI({
+  apiKey: process.env.OPENAI_API_KEY,
+  completionParams: {
+    model: 'gpt-4',
+    temperature: 0.5,
+    top_p: 0.8
+  }
+})
 
 const server = http.createServer((req, res) => {
   if (req.method === 'POST' && req.url === '/api/chat') {
