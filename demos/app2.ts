@@ -8,7 +8,7 @@ import { ChatGPTAPI } from '../src'
 dotenv.config()
 const api = new ChatGPTAPI({
   apiKey: process.env.OPENAI_API_KEY,
-  debug: true,
+  debug: false,
   completionParams: {
     model: 'gpt-3.5-turbo'
   }
