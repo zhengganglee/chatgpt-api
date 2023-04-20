@@ -10,7 +10,7 @@ const api = new ChatGPTAPI({
   apiKey: process.env.OPENAI_API_KEY,
   debug: true,
   completionParams: {
-    model: 'gpt-4'
+    model: 'gpt-3.5-turbo'
   }
 })
 
